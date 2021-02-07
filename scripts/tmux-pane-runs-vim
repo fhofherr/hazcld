@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+PATTERN="[[:space:]]*g?(view|n?vim?x?)(diff)?"
+
+function find_vim() {
+    local pid
+
+    pid="$1"
+
+    while [[ -n "$pid" ]]; do
+        read -r pid cmd <<<"$(command ps --ppid "$pid" -o pid= -o comm=)"
+        if [[ "$cmd" =~ $PATTERN ]]; then
+            return 0
+        fi
+    done
+
+    return 1
+}
+
+find_vim "$1"

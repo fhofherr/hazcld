@@ -45,6 +45,23 @@ find_vim "$1"
 This is an attempt to generalize the above script and make it faster by
 reducing the amount of calls to `ps`.
 
+A short try with the initial draft version looks promising. Please note
+that this was not a properly planned benchmark. It mainly served to play
+around a little with
+[`hyperfine`](https://github.com/sharkdp/hyperfine):
+
+| Command | Mean [ms] | Min [ms] | Max [ms] | Relative |
+|:---|---:|---:|---:|---:|
+| `./scripts/tmux-pane-runs-vim 2210` | 22.6 ± 1.2 | 21.1 | 26.9 | 5.18 ± 0.76 |
+| `./bin/hazcld '\s*g?(view\|n?vim?x?)(diff)?' 2210` | 4.4 ± 0.6 | 3.6 | 6.6 | 1.00 |
+
+Above table shows the output of
+
+    hyperfine --export-markdown results.md \
+              --warmup 10 \
+              "./scripts/tmux-pane-runs-vim 2210" \
+              "./bin/hazcld '\s*g?(view|n?vim?x?)(diff)?' 2210"
+
 ## Installation
 
 The package can be installed using `go get`:
