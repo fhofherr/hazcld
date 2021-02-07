@@ -77,6 +77,16 @@ parent process.
 
     hazcld '\s*g?(view|n?vim?x?)(diff)?' 2210
 
+### Tmux
+
+This repository contains a `hazcld_vim.tmux` script which can be used as
+a [TPM](https://github.com/tmux-plugins/tpm) tmux plugin.
+
+Add the following line to your `tmux.conf` and install the
+`christoomey/vim-tmux-navigator` vim plugin.
+
+    set -g @plugin 'fhofherr/hazcld'
+
 ## License
 
 Copyright © 2021 Ferdinand Hofherr
